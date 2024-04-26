@@ -1,17 +1,20 @@
 import { DateTime } from 'luxon';
 import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm';
-import Portfolio from './portfolio.js'; // Adjust the path to the actual location of your portfolio model file
+import User from './user.js'; // Adjust the path to the actual location of your user model file
 import type { HasMany } from '@adonisjs/lucid/types/relations'; // Correct import path
 
-export default class User extends BaseModel {
+export default class Portfolio extends BaseModel {
   @column()
-  declare email: string;
+  declare projectName: string;
 
   @column()
-  declare address: string;
+  declare projectDescription: string;
 
   @column()
-  declare linkedInurl: string;
+  declare imageUrl: string;
+
+  @column()
+  declare userId: number; // Assuming a foreign key to the user model
 
   @column({ isPrimary: true })
   declare id: number;
@@ -23,6 +26,6 @@ export default class User extends BaseModel {
   declare updatedAt: DateTime;
 
   // Relationships
-  @hasMany(() => Portfolio)
-  declare portfolios: HasMany<typeof Portfolio>; // Assuming the relationship in the Portfolio model is named 'portfolios'
+  @hasMany(() => User) // Assuming the relationship in the User model is named 'portfolios'
+  declare user: HasMany<typeof User>;
 }

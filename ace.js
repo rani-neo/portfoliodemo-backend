@@ -21,6 +21,10 @@
  */
 import { register } from 'node:module'
 register('ts-node/esm', import.meta.url)
+// Import the 'register' variable from the 'module' module
+
+
+// Use the 'register' variable in your code
 
 /**
  * Import ace console entrypoint
