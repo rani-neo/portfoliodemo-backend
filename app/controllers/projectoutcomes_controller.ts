@@ -1,14 +1,14 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { HttpContext } from '@adonisjs/core/build/standalone';
+import { HttpContext} from '@adonisjs/core/http';
 
-import ProjectOutcome from '../models/projectOutcome.js'; // Adjust the path to the actual location of your ProjectOutcome model file
+import ProjectOutcome from '../models/project.js'; // Adjust the path to the actual location of your ProjectOutcome model file
 
 export default class ProjectOutcomeController {
 
   /**
    * Get all project outcomes
    */
-  public async index({ response }: HttpContextContract) {
+  public async index({ response }: HttpContext) {
     try {
       const projectOutcomes = await ProjectOutcome.all();
       return response.ok(projectOutcomes);
@@ -21,7 +21,7 @@ export default class ProjectOutcomeController {
   /**
    * Create a new project outcome
    */
-  public async store({ request, response }: HttpContextContract) {
+  public async store({ request, response }: HttpContext) {
     try {
       const projectOutcomeData = request.only(['verb', 'subject', 'fromTo', 'unit', 'unitOfMeasure']); // Adjust field names as needed
       const projectOutcome = new ProjectOutcome();
@@ -41,7 +41,7 @@ export default class ProjectOutcomeController {
   /**
    * Get a single project outcome by ID
    */
-  public async show({ params, response }: HttpContextContract) {
+  public async show({ params, response }: HttpContext) {
     try {
       const projectOutcomeId = params.id;
       const projectOutcome = await ProjectOutcome.findOrFail(projectOutcomeId);
@@ -55,7 +55,7 @@ export default class ProjectOutcomeController {
   /**
    * Update a project outcome by ID
    */
-  public async update({ params, request, response }: HttpContextContract) {
+  public async update({ params, request, response }: HttpContext) {
     try {
       const projectOutcomeId = params.id;
       const projectOutcome = await ProjectOutcome.findOrFail(projectOutcomeId);
@@ -76,7 +76,7 @@ export default class ProjectOutcomeController {
   /**
    * Delete a project outcome by ID
    */
-  public async destroy({ params, response }: HttpContextContract) {
+  public async destroy({ params, response }: HttpContext) {
     try {
       const projectOutcomeId = params.id;
       const projectOutcome = await ProjectOutcome.findOrFail(projectOutcomeId);

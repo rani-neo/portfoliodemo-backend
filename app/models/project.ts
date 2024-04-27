@@ -28,4 +28,9 @@ export default class Portfolio extends BaseModel {
   // Relationships
   @hasMany(() => User) // Assuming the relationship in the User model is named 'portfolios'
   declare user: HasMany<typeof User>;
+  verb: any;
+  subject: any;
+  fromTo: any;
+  unit: any;
+  unitOfMeasure: any;
 }

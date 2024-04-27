@@ -1,11 +1,11 @@
 import Portfolio from '../models/portfolio.js'; // Adjust the path to the actual location of your portfolio model file
-
+import { HttpContext} from '@adonisjs/core/http';
 export default class PortfoliosController {
 
   /**
    * Get all portfolios
    */
-  public async index({ response }: HttpContextContract) {
+  public async index({ response }: HttpContext) {
     try {
       const portfolios = await Portfolio.all();
       return response.ok(portfolios);
@@ -18,7 +18,7 @@ export default class PortfoliosController {
   /**
    * Create a new portfolio
    */
-  public async store({ request, response }: HttpContextContract) {
+  public async store({ request, response }: HttpContext) {
     try {
       const portfolioData = request.only(['name', 'userId']); // Adjust field names as needed
       const portfolio = new Portfolio();
@@ -35,7 +35,7 @@ export default class PortfoliosController {
   /**
    * Get a single portfolio by ID
    */
-  public async show({ params, response }: HttpContextContract) {
+  public async show({ params, response }: HttpContext) {
     try {
       const portfolioId = params.id;
       const portfolio = await Portfolio.findOrFail(portfolioId);
@@ -49,7 +49,7 @@ export default class PortfoliosController {
   /**
    * Update a portfolio by ID
    */
-  public async update({ params, request, response }: HttpContextContract) {
+  public async update({ params, request, response }: HttpContext) {
     try {
       const portfolioId = params.id;
       const portfolio = await Portfolio.findOrFail(portfolioId);
@@ -67,7 +67,7 @@ export default class PortfoliosController {
   /**
    * Delete a portfolio by ID
    */
-  public async destroy({ params, response }: HttpContextContract) {
+  public async destroy({ params, response }: HttpContext) {
     try {
       const portfolioId = params.id;
       const portfolio = await Portfolio.findOrFail(portfolioId);

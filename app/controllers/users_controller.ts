@@ -1,12 +1,12 @@
 import User from "../models/user.js";
-import { HttpContextContract } from '@adonisjs/core/http';
+import type { HttpContext } from '@adonisjs/core/http'
 
 export default class UsersController {
 
   /**
    * Get all users
    */
-  public async index({ response }: HttpContextContract) {
+  public async index({ response }: HttpContext) {
     try {
       const users = await User.all();
       return response.ok(users);
@@ -19,7 +19,7 @@ export default class UsersController {
   /**
    * Create a new user
    */
-  public async store({ request, response }: HttpContextContract) {
+  public async store({ request, response }: HttpContext) {
     try {
       const userData = request.only(['email', 'address', 'linkedInurl']);
       const user = new User();
@@ -37,7 +37,7 @@ export default class UsersController {
   /**
    * Get a single user by ID
    */
-  public async show({ params, response }: HttpContextContract) {
+  public async show({ params, response }: HttpContext) {
     try {
       const userId = params.id;
       const user = await User.findOrFail(userId);
@@ -51,7 +51,7 @@ export default class UsersController {
   /**
    * Update a user by ID
    */
-  public async update({ params, request, response }: HttpContextContract) {
+  public async update({ params, request, response }: HttpContext) {
     try {
       const userId = params.id;
       const user = await User.findOrFail(userId);
@@ -70,7 +70,7 @@ export default class UsersController {
   /**
    * Delete a user by ID
    */
-  public async destroy({ params, response }: HttpContextContract) {
+  public async destroy({ params, response }: HttpContext) {
     try {
       const userId = params.id;
       const user = await User.findOrFail(userId);

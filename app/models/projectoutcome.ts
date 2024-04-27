@@ -23,7 +23,7 @@ declare unit: string
 declare  unitOfMeasure: string
 
 @manyToMany(() => project)
-declare projects: ManyToMany<typeof this.projects>
+declare projectoutcomes: ManyToMany<typeof project>
 }
 
 

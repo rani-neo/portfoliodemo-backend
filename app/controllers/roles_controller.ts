@@ -1,4 +1,4 @@
-import { HttpContextContract } from '@adonisjs/core/http';
+import { HttpContext} from '@adonisjs/core/http';
 import Role from '../models/role.js'; // Adjust the path to the actual location of your Role model file
 
 export default class RoleController {
@@ -6,7 +6,7 @@ export default class RoleController {
   /**
    * Get all roles
    */
-  public async index({ response }: HttpContextContract) {
+  public async index({ response }: HttpContext) {
     try {
       const roles = await Role.all();
       return response.ok(roles);
@@ -19,7 +19,7 @@ export default class RoleController {
   /**
    * Create a new role
    */
-  public async store({ request, response }: HttpContextContract) {
+  public async store({ request, response }: HttpContext) {
     try {
       const roleData = request.only(['name']); // Adjust field names as needed
       const role = new Role();
@@ -35,7 +35,7 @@ export default class RoleController {
   /**
    * Get a single role by ID
    */
-  public async show({ params, response }: HttpContextContract) {
+  public async show({ params, response }: HttpContext) {
     try {
       const roleId = params.id;
       const role = await Role.findOrFail(roleId);
@@ -49,7 +49,7 @@ export default class RoleController {
   /**
    * Update a role by ID
    */
-  public async update({ params, request, response }: HttpContextContract) {
+  public async update({ params, request, response }: HttpContext) {
     try {
       const roleId = params.id;
       const role = await Role.findOrFail(roleId);
@@ -66,7 +66,7 @@ export default class RoleController {
   /**
    * Delete a role by ID
    */
-  public async destroy({ params, response }: HttpContextContract) {
+  public async destroy({ params, response }: HttpContext) {
     try {
       const roleId = params.id;
       const role = await Role.findOrFail(roleId);
