@@ -1,4 +1,4 @@
-import { HttpContextContract } from '@adonisjs/core/http';
+import { HttpContext} from '@adonisjs/core/http';
 import Project from '../models/portfolio.js'; // Adjust the path to the actual location of your project model file
 
 export default class ProjectsController {
@@ -6,7 +6,7 @@ export default class ProjectsController {
   /**
    * Get all projects
    */
-  public async index({ response }: HttpContextContract) {
+  public async index({ response }: HttpContext) {
     try {
       const projects = await Project.all();
       return response.ok(projects);
@@ -19,7 +19,7 @@ export default class ProjectsController {
   /**
    * Create a new project
    */
-  public async store({ request, response }: HttpContextContract) {
+  public async store({ request, response }: HttpContext) {
     try {
       const projectData = request.only(['projectName', 'projectDescription', 'imageUrl', 'userId']);
       const project = new Project();
@@ -38,7 +38,7 @@ export default class ProjectsController {
   /**
    * Get a single project by ID
    */
-  public async show({ params, response }: HttpContextContract) {
+  public async show({ params, response }: HttpContext) {
     try {
       const projectId = params.id;
       const project = await Project.findOrFail(projectId);
@@ -52,7 +52,7 @@ export default class ProjectsController {
   /**
    * Update a project by ID
    */
-  public async update({ params, request, response }: HttpContextContract) {
+  public async update({ params, request, response }: HttpContext) {
     try {
       const projectId = params.id;
       const project = await Project.findOrFail(projectId);
@@ -72,7 +72,7 @@ export default class ProjectsController {
   /**
    * Delete a project by ID
    */
-  public async destroy({ params, response }: HttpContextContract) {
+  public async destroy({ params, response }: HttpContext) {
     try {
       const projectId = params.id;
       const project = await Project.findOrFail(projectId);
