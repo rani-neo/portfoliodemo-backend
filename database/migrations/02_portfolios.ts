@@ -7,7 +7,7 @@ export default class Portfolios extends BaseSchema {
     await this.schema.createTable(this.tableName, (table) => {
       table.increments('id') // Primary key
       table.string('name').notNullable()
-      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE') // Example foreign key
+      table.integer('user_id').unsigned().references('id').inTable('user').onDelete('CASCADE') // Example foreign key
       table.timestamps(true) // Add created_at and updated_at timestamps
     })
   }
