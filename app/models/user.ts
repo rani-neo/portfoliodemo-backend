@@ -4,14 +4,21 @@ import Portfolio from './portfolio.js'; // Adjust the path to the actual locatio
 import type { HasMany } from '@adonisjs/lucid/types/relations'; // Correct import path
 
 export default class User extends BaseModel {
-  @column()
-  declare email: string;
 
   @column()
-  declare address: string;
+  declare name: string
 
   @column()
-  declare linkedInurl: string;
+  declare phone: string
+
+  @column()
+  declare email: string
+
+  @column()
+  declare address: string
+
+  @column()
+  declare linkedInurl: string
 
   @column({ isPrimary: true })
   declare id: number;
@@ -25,4 +32,5 @@ export default class User extends BaseModel {
   // Relationships
   @hasMany(() => Portfolio)
   declare portfolios: HasMany<typeof Portfolio>; // Assuming the relationship in the Portfolio model is named 'portfolios'
+
 }

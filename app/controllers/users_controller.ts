@@ -1,5 +1,5 @@
 import User from "../models/user.js";
-import type { HttpContext } from '@adonisjs/core/http'
+import { HttpContext } from '@adonisjs/core/http'
 
 export default class UsersController {
 
@@ -21,7 +21,7 @@ export default class UsersController {
    */
   public async store({ request, response }: HttpContext) {
     try {
-      const userData = request.only(['email', 'address', 'linkedInurl']);
+      const userData = request.only(['name', 'phone', 'email', 'address', 'linkedInurl']);
       const user = new User();
       user.email = userData.email;
       user.address = userData.address;
@@ -55,7 +55,8 @@ export default class UsersController {
     try {
       const userId = params.id;
       const user = await User.findOrFail(userId);
-      const userData = request.only(['email', 'address', 'linkedInurl']);
+      const userData = request.only(['name', 'phone','email', 'address', 'linkedInurl']);
+      user.name = userData.name || user.name;
       user.email = userData.email || user.email;
       user.address = userData.address || user.address;
       user.linkedInurl = userData.linkedInurl || user.linkedInurl;
