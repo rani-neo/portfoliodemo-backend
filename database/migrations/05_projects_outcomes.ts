@@ -1,23 +1,25 @@
-import { BaseSchema } from '@Adonis/Lucid/Schema'
+import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class ProjectOutcomes extends BaseSchema {
   protected tableName = 'project_outcomes';
-  schema: any;
 
   public async up() {
-    this.schema.createTable(this.tableName, (table: { increments: (arg0: string) => { (): any; new(): any; primary: { (): void; new(): any; }; }; integer: (arg0: string) => { (): any; new(): any; unsigned: { (): { (): any; new(): any; references: { (arg0: string): { (): any; new(): any; inTable: { (arg0: string): { (): any; new(): any; onDelete: { (arg0: string): { (): any; new(): any; notNullable: { (): void; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; string: (arg0: string) => { (): any; new(): any; notNullable: { (): void; new(): any; }; }; timestamps: (arg0: boolean, arg1: boolean) => void; }) => {
+    await this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary();
-      table.integer('project_id').unsigned().references('id').inTable('projects').onDelete('CASCADE').notNullable();
       table.string('verb').notNullable();
       table.string('subject').notNullable();
-      table.string('from_to').notNullable();
+      table.string('from_to').notNullable(); // Corrected column name
       table.string('units').notNullable();
       table.string('units_of_measure').notNullable();
-      table.timestamps(true, true);
+
+      // Corrected syntax for defining timestamps with timezone
+      table.timestamp('created_at', { useTz: true });
+      table.timestamp('updated_at', { useTz: true });
     });
   }
 
   public async down() {
-    this.schema.dropTable(this.tableName);
+    await this.schema.dropTable(this.tableName);
   }
 }
+
