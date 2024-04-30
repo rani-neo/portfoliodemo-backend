@@ -18,7 +18,7 @@ export default class User extends BaseModel {
   declare address: string
 
   @column()
-  declare linkedInurl: string
+  declare linkedIn_url: string
 
   @column({ isPrimary: true })
   declare id: number;
